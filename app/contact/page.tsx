@@ -1,0 +1,216 @@
+import type { Metadata } from "next";
+import { Clock, Mail, MapPin } from "lucide-react";
+import { ConsultationForm } from "@/components/forms/ConsultationForm";
+import { PageHero } from "@/components/sections/PageHero";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+import { ButtonLink } from "@/components/ui/Button";
+import { Disclaimer } from "@/components/ui/Disclaimer";
+import { COMPANY } from "@/lib/content/company";
+import { PROCESS } from "@/lib/content/homepage";
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildMetadata({
+  title: "Book a Consultation",
+  description:
+    "Book a free 15-minute consultation with Sarvam Associates in Bhandup West, Mumbai. No obligation, no sales script — including an honest answer if you don't need us.",
+  path: "/contact",
+});
+
+export default function ContactPage() {
+  return (
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" },
+        ]}
+      />
+
+      <PageHero
+        eyebrow="Get in touch"
+        title={
+          <>
+            Let&rsquo;s build your{" "}
+            <span className="italic">financial plan</span> together.
+          </>
+        }
+        lede="Fifteen minutes on a call. We ask about your goals, your timeline and what you already hold — then tell you honestly whether we can add anything."
+        crumbs={[{ label: "Contact" }]}
+      />
+
+      {/*
+        Two ways in, and the planner leads.
+
+        A consultation form asks someone to spend their time before they have
+        seen anything; the planner gives them a document first and asks for
+        fifteen minutes afterwards. The form stays because plenty of people
+        arrive already knowing what they want to ask.
+      */}
+      <section className="bg-paper pt-4">
+        <div className="container-page">
+          <div className="bg-navy grain rounded-panel relative isolate overflow-hidden p-8 sm:p-10 lg:p-12">
+            <span
+              aria-hidden
+              className="absolute -top-[40%] -right-[5%] size-[40vw] max-w-[32rem] rounded-full bg-[radial-gradient(circle,var(--color-navy-600)_0%,transparent_65%)] opacity-70"
+            />
+
+            <div className="relative grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-16">
+              <div>
+                <p className="text-eyebrow text-paper/50 uppercase">
+                  Before you book
+                </p>
+                <h2 className="font-display text-paper text-display-sm mt-4 max-w-[22ch]">
+                  Build your financial plan first. It takes ten minutes.
+                </h2>
+                <p className="text-paper/65 measure mt-5 text-sm leading-relaxed">
+                  Map your income, your goals and what you already hold, and
+                  see what each goal is projected to cost by the time it
+                  arrives — and what your current saving will actually cover.
+                  You get the document whether or not you ever call us.
+                </p>
+                <p className="text-paper/45 mt-4 text-xs leading-relaxed">
+                  No PAN, no Aadhaar, no bank details. An illustration built
+                  from your own figures, not investment advice.
+                </p>
+              </div>
+
+              <ButtonLink
+                href="/financial-plan"
+                variant="primaryOnDark"
+                size="lg"
+                withArrow
+                className="shrink-0"
+              >
+                Start my plan
+              </ButtonLink>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-paper section-sm">
+        <div className="container-page">
+          <div className="grid gap-12 lg:grid-cols-[1.3fr_0.85fr] lg:gap-16">
+            <div>
+              <h2 className="font-display text-navy text-display-sm mb-6">
+                Or just book a call
+              </h2>
+              <ConsultationForm />
+            </div>
+
+            <aside className="space-y-8">
+              {/* Contact details */}
+              <div className="border-line rounded-card border bg-card p-7">
+                <h2 className="font-display text-navy text-lg font-semibold">
+                  Reach us directly
+                </h2>
+
+                <dl className="mt-5 space-y-5">
+                  <div className="flex gap-3.5">
+                    <span
+                      aria-hidden
+                      className="bg-navy/[0.05] text-navy grid size-9 shrink-0 place-items-center rounded-full"
+                    >
+                      <MapPin strokeWidth={1.75} className="size-4" />
+                    </span>
+                    <div>
+                      <dt className="text-muted text-xs tracking-[0.08em] uppercase">
+                        Office
+                      </dt>
+                      <dd className="text-body mt-1 text-sm leading-relaxed not-italic">
+                        {COMPANY.addressLines.map((line) => (
+                          <span key={line} className="block">
+                            {line}
+                          </span>
+                        ))}
+                      </dd>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3.5">
+                    <span
+                      aria-hidden
+                      className="bg-navy/[0.05] text-navy grid size-9 shrink-0 place-items-center rounded-full"
+                    >
+                      <Mail strokeWidth={1.75} className="size-4" />
+                    </span>
+                    <div>
+                      <dt className="text-muted text-xs tracking-[0.08em] uppercase">
+                        Email
+                      </dt>
+                      <dd className="mt-1 text-sm">
+                        <a
+                          href={`mailto:${COMPANY.email}`}
+                          className="text-navy link-underline"
+                        >
+                          {COMPANY.email}
+                        </a>
+                      </dd>
+                    </div>
+                  </div>
+
+                  {COMPANY.phone && (
+                    <div className="flex gap-3.5">
+                      <span
+                        aria-hidden
+                        className="bg-navy/[0.05] text-navy grid size-9 shrink-0 place-items-center rounded-full"
+                      >
+                        <Clock strokeWidth={1.75} className="size-4" />
+                      </span>
+                      <div>
+                        <dt className="text-muted text-xs tracking-[0.08em] uppercase">
+                          Phone
+                        </dt>
+                        <dd className="mt-1 text-sm">
+                          <a
+                            href={`tel:${COMPANY.phone.replace(/\s/g, "")}`}
+                            className="text-navy link-underline"
+                          >
+                            {COMPANY.phone}
+                          </a>
+                        </dd>
+                      </div>
+                    </div>
+                  )}
+                </dl>
+              </div>
+
+              {/* What happens next */}
+              <div className="bg-navy grain relative isolate overflow-hidden rounded-card p-7">
+                <h2 className="font-display text-paper text-lg font-semibold">
+                  What happens next
+                </h2>
+
+                <ol className="mt-5 space-y-4">
+                  {PROCESS.map((step) => (
+                    <li key={step.step} className="flex gap-3.5">
+                      <span
+                        aria-hidden
+                        className="font-display text-paper/45 w-6 shrink-0 text-sm font-bold tabular-nums"
+                      >
+                        {String(step.step).padStart(2, "0")}
+                      </span>
+                      <div>
+                        <h3 className="text-paper text-sm font-medium">
+                          {step.title}
+                        </h3>
+                        <p className="text-paper/45 mt-0.5 text-xs leading-relaxed">
+                          {step.description}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+
+              <Disclaimer
+                ids={["not-investment-advice", "distributor-role"]}
+                variant="panel"
+              />
+            </aside>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}

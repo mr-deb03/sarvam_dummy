@@ -1,0 +1,506 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Sarvam Associates — design tokens
+
+   The palette is the brand's own, lifted from the live site at
+   sarvamassociates.com. Its theme declares:
+
+     --navy #00387a   --navy2 #002d63   --gold #f26522   --green-light #fde8d8
+     --text #1a2e4a   --muted #4a6a8f   --border #dde8f5
+     --bg   #f4f8ff   --card  #ffffff
+
+   Two notes on that source, since the names mislead. What the theme calls
+   "gold" is a vivid orange, and "green" is aliased to the same value — so the
+   token here is named `accent`, after what it does rather than what the
+   stylesheet calls it.
+
+   Every token is also a real CSS custom property, so inline SVG, motion values
+   and meta[theme-color] can read them without importing anything.
+   ========================================================================== */
+
+@theme {
+  /* ------------------------------------------------------------------ *
+   * COLOUR
+   * Grounds: paper (page) · card (surfaces) · mist (alternating sections)
+   * Structure: navy · navy-deep
+   * Accent: the brand orange, used for detail, never for large fills
+   * ------------------------------------------------------------------ */
+
+  /* Light grounds. `paper` is the page; `card` is white, so surfaces separate
+     from the ground without needing a shadow. */
+  --color-paper: #f4f8ff;
+  --color-card: #ffffff;
+  --color-mist: #e5eef6;
+  --color-line: #dde8f5;
+
+  /* Structural dark. */
+  --color-navy: #00387a;
+  --color-navy-deep: #002d63;
+  /* One step up from navy, for raised panels and glows inside dark sections.
+     Derived — the source theme has no equivalent. */
+  --color-navy-600: #0a4a93;
+
+  /* Text. Both are the brand's own values and both clear AA on paper:
+     body 12.9:1, muted 5.3:1 — so unlike the previous palette, `muted` is
+     safe for small print as well as metadata. */
+  --color-body: #1a2e4a;
+  --color-muted: #4a6a8f;
+
+  /* Brand accent. */
+  --color-accent: #f26522;
+  --color-accent-light: #fde8d8;
+  /* The brand orange is 2.96:1 on paper — below AA, and below even the 3:1
+     large-text floor. It must never carry text on a light ground. This
+     darkened tone is the only accent permitted as text there. It is set against
+     the worst ground it actually lands on — the composited chip tint, where it
+     is 4.8:1 — rather than against flat paper, where it is 6.0:1. On navy,
+     plain --color-accent is 3.6:1: fine for icons and large text, not for
+     small copy. */
+  --color-accent-ink: #a63c09;
+
+  /* Semantic. The source theme defines no distinct success or error colour —
+     its `--green` points at the orange, and the reds present are WooCommerce
+     defaults rather than brand. These are chosen to sit in the cool palette;
+     both clear AA on paper (6.0:1 and 6.1:1). */
+  --color-positive: #1b6b52;
+  --color-error: #b3261e;
+
+  /* ------------------------------------------------------------------ *
+   * TYPE
+   * ------------------------------------------------------------------ */
+
+  --font-display: var(--font-montserrat), "Segoe UI", system-ui, sans-serif;
+  /* "Open Sans" is named directly rather than via --font-open-sans, which
+     expands to `"Open Sans", "Open Sans Fallback"` — and that second family is
+     local(Arial) with metric overrides. Open Sans has no ₹ glyph at all
+     (U+20B9 is absent from the font, not just from the latin subset), so with
+     the Arial-backed fallback in the chain every rupee on the site rendered in
+     Arial. Montserrat sits next so ₹ lands on the other brand face. */
+  --font-sans: "Open Sans", var(--font-montserrat), system-ui, -apple-system,
+    sans-serif;
+
+  /* Display scale. Fluid by design — never a shrunk desktop size.
+
+     Cut for Montserrat, a geometric sans. These numbers are NOT the ones a
+     serif wants: Montserrat's x-height is much larger and its forms wider, so
+     the line-heights are looser than they look and the tracking is deliberately
+     less negative. Weight sits at 700 for the two largest steps because a
+     geometric sans at 500 reads limp above ~60px, and 700 is how the brand
+     sets its own headlines. */
+  /* The floor was 3.25rem, which is wider than a 320px content column can
+     hold: "guesswork" alone overflowed its box by 13px. A `vw + rem` term
+     instead of plain vw keeps phones legible (44px) while still reaching 96px
+     by 1440 — a plain-vw curve low enough to fit 320px would have left tablets
+     undersized. */
+  --text-display-hero: clamp(2.75rem, 5vw + 1.5rem, 6.5rem);
+  --text-display-hero--line-height: 1.02;
+  --text-display-hero--letter-spacing: -0.028em;
+  --text-display-hero--font-weight: 700;
+
+  --text-display-lg: clamp(2.5rem, 4.5vw, 4.75rem);
+  --text-display-lg--line-height: 1.08;
+  --text-display-lg--letter-spacing: -0.022em;
+  --text-display-lg--font-weight: 700;
+
+  --text-display-md: clamp(1.875rem, 3vw, 3.25rem);
+  --text-display-md--line-height: 1.18;
+  --text-display-md--letter-spacing: -0.015em;
+  --text-display-md--font-weight: 600;
+
+  --text-display-sm: clamp(1.5rem, 2.2vw, 2.125rem);
+  --text-display-sm--line-height: 1.3;
+  --text-display-sm--letter-spacing: -0.008em;
+  --text-display-sm--font-weight: 600;
+
+  /* Interface scale. */
+  --text-card: 1.375rem;
+  --text-card--line-height: 1.25;
+  --text-card--letter-spacing: -0.006em;
+  --text-card--font-weight: 600;
+
+  --text-body-lg: clamp(1.0625rem, 1.2vw, 1.25rem);
+  --text-body-lg--line-height: 1.65;
+
+  --text-base: 1rem;
+  --text-base--line-height: 1.7;
+
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.55;
+
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.5;
+
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.15em;
+  --text-eyebrow--font-weight: 600;
+
+  /* Statistics: tight and tabular. Tracking is looser than the previous
+     scale because Open Sans has noticeably wider digits than Manrope, and the
+     old -0.045em ran them together at 88px. */
+  --text-stat: clamp(2.5rem, 5vw, 5.5rem);
+  --text-stat--line-height: 0.98;
+  --text-stat--letter-spacing: -0.028em;
+  --text-stat--font-weight: 700;
+
+  --text-stat-sm: clamp(1.875rem, 3vw, 2.75rem);
+  --text-stat-sm--line-height: 1.05;
+  --text-stat-sm--letter-spacing: -0.022em;
+  --text-stat-sm--font-weight: 700;
+
+  /* ------------------------------------------------------------------ *
+   * FORM — restrained rounding; established, not playful.
+   * ------------------------------------------------------------------ */
+
+  --radius-input: 10px;
+  --radius-card: 14px;
+  --radius-panel: 24px;
+  --radius-pill: 999px;
+
+  /* Elevation is nearly absent by design. Hierarchy comes from type and
+     space, not from shadows. */
+  --shadow-raise: 0 1px 2px rgb(0 40 90 / 0.03);
+  --shadow-lift: 0 1px 2px rgb(0 40 90 / 0.03), 0 8px 24px rgb(0 40 90 / 0.05);
+  --shadow-float: 0 2px 6px rgb(0 40 90 / 0.04), 0 20px 56px rgb(0 40 90 / 0.09);
+
+  /* ------------------------------------------------------------------ *
+   * MOTION — calm, expensive, intentional. 200–500ms.
+   * ------------------------------------------------------------------ */
+
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 7rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Display face defaults. Sizing always comes from an explicit text-* token
+     so no heading is left at a browser default. */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--color-accent) 28%, transparent);
+    color: var(--color-navy);
+  }
+}
+
+/* ==========================================================================
+   Layout primitives
+   ========================================================================== */
+
+/* Content column: 1280px max, 64px desktop gutter → 1408px outer.
+   Every section uses this. No section invents its own width. */
+@utility container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1.5rem;
+
+  @media (width >= 48rem) {
+    padding-inline: 2rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 4rem;
+  }
+}
+
+/* Long-form editorial measure — 45–75 characters. */
+/* Vertical rhythm. Generous by default — premium design needs breathing room. */
+@utility section-sm {
+  padding-block: 3rem;
+  @media (width >= 48rem) {
+    padding-block: 5rem;
+  }
+}
+
+@utility section {
+  padding-block: 4.5rem;
+  @media (width >= 48rem) {
+    padding-block: 7.5rem;
+  }
+}
+
+/* Paragraph measure helpers. */
+@utility measure {
+  max-width: 40rem;
+}
+
+@utility measure-wide {
+  max-width: 46rem;
+}
+
+/* ==========================================================================
+   Detail utilities
+   ========================================================================== */
+
+/* Tabular figures. Required on every rupee value and animated number —
+   proportional digits reflow their container on each frame otherwise. */
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* The accent hairline that precedes an eyebrow label. This is the accent's
+   main job on the site: a quiet detail, never a headline colour. */
+@utility accent-rule {
+  display: inline-block;
+  width: 2rem;
+  height: 1px;
+  background-color: var(--color-accent);
+  vertical-align: middle;
+}
+
+/* Barely-there paper texture. Pure CSS, no request, no layout cost. */
+@utility grain {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* Animated underline for inline editorial links. */
+@utility link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition: background-size 0.4s var(--ease-editorial);
+
+  &:hover,
+  &:focus-visible {
+    background-size: 100% 1px;
+  }
+}
+
+/* ==========================================================================
+   Keyframes — run during first paint, no JS gate, cannot delay LCP.
+   ========================================================================== */
+
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Scroll reveals — CSS-first, progressively enhanced.
+
+   Content is VISIBLE BY DEFAULT. The hidden state applies only once the inline
+   bootstrap script has added `.js` to <html>, and only when the user has not
+   asked for reduced motion.
+
+   That ordering is load-bearing. A JS-first reveal leaves every below-the-fold
+   section — disclaimers and risk blocks included — invisible to anyone whose
+   JavaScript is slow, blocked or broken. On a site with mandatory risk
+   disclosure that is not an acceptable failure mode.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal],
+  html.js [data-reveal-item] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.7s var(--ease-editorial),
+      transform 0.7s var(--ease-editorial);
+  }
+
+  /* A stagger parent reveals its children, not itself. */
+  html.js [data-reveal="stagger"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  html.js [data-reveal][data-revealed],
+  html.js [data-reveal][data-revealed] [data-reveal-item] {
+    opacity: 1;
+    transform: none;
+  }
+
+  html.js [data-reveal][data-revealed] [data-reveal-item]:nth-child(1) {
+    transition-delay: 0.04s;
+  }
+  html.js [data-reveal][data-revealed] [data-reveal-item]:nth-child(2) {
+    transition-delay: 0.12s;
+  }
+  html.js [data-reveal][data-revealed] [data-reveal-item]:nth-child(3) {
+    transition-delay: 0.2s;
+  }
+  html.js [data-reveal][data-revealed] [data-reveal-item]:nth-child(4) {
+    transition-delay: 0.28s;
+  }
+  html.js [data-reveal][data-revealed] [data-reveal-item]:nth-child(5) {
+    transition-delay: 0.36s;
+  }
+  html.js [data-reveal][data-revealed] [data-reveal-item]:nth-child(6) {
+    transition-delay: 0.44s;
+  }
+  html.js [data-reveal][data-revealed] [data-reveal-item]:nth-child(n + 7) {
+    transition-delay: 0.5s;
+  }
+
+  .hero-label {
+    animation: fadeSlideIn 0.7s var(--ease-editorial) both;
+  }
+}
+
+/* ==========================================================================
+   Reduced motion — the CSS half of the answer. The JS half is
+   <MotionConfig reducedMotion="user"> in app/providers.tsx.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================================
+   Print
+
+   The financial plan is a document people will save and send on, so the
+   printed form is a first-class output rather than an afterthought. These
+   rules restyle the plan page itself instead of duplicating it into a
+   separate template — one layout, one set of figures, nothing to drift.
+
+   See components/plan/PrintButton.tsx for why PDF generation goes through the
+   browser's own print pipeline rather than a server-side renderer.
+   ========================================================================== */
+
+@media print {
+  /* Chrome and Safari strip backgrounds by default, which would flatten every
+     panel on the page into the same white block. */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  @page {
+    margin: 14mm 12mm;
+  }
+
+  html,
+  body {
+    background: #fff;
+  }
+
+  /* Site chrome has no business on a printed plan. */
+  header[class*="fixed"],
+  footer,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* The page is already inside the print margin; a second one wastes a third
+     of the sheet. */
+  .container-page {
+    max-width: none;
+    padding-inline: 0;
+  }
+
+  .section,
+  .section-sm {
+    padding-block: 0;
+  }
+
+  /* Anything waiting on the intersection observer must be visible on paper —
+     printing does not scroll, so nothing would ever reveal. Disclaimers are
+     inside revealed sections, which makes this a compliance rule, not a
+     cosmetic one. */
+  html.js [data-reveal],
+  html.js [data-reveal-item] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .grain::after,
+  .grain::before {
+    display: none !important;
+  }
+
+  .plan-report {
+    font-size: 10.5pt;
+  }
+
+  /* Keep a heading with the content it introduces, and never split a figure
+     away from its label. */
+  .plan-section h2,
+  .plan-section h3 {
+    break-after: avoid;
+  }
+
+  .plan-section table {
+    break-inside: auto;
+  }
+
+  .plan-section tr {
+    break-inside: avoid;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
