@@ -11,7 +11,7 @@ export const GENERAL_FAQS: Faq[] = [
   {
     question: "What exactly does Sarvam Associates do?",
     answer:
-      "Two things, for the same clients. We are a chartered accountancy practice handling direct tax, GST, audit and compliance. We are also an AMFI-registered mutual fund distributor and an authorised distribution partner of Nuvama Wealth Management Ltd, through which we help clients invest. The point of doing both is that your tax position and your investments get considered together rather than by two people who never speak.",
+      "Two things, for the same clients. We are a chartered accountancy practice handling direct tax, GST, audit and compliance. We are also an AMFI-registered mutual fund distributor and an authorised distribution partner for the investment products shown on this site, through which we help clients invest. The point of doing both is that your tax position and your investments get considered together rather than by two people who never speak.",
   },
   {
     question: "Are you an investment adviser or a distributor?",
@@ -24,9 +24,9 @@ export const GENERAL_FAQS: Faq[] = [
       "Through distribution commission paid by product manufacturers, which is built into the product rather than billed to you separately. This is standard for a distributor, and it is worth understanding, because it means we have a commercial relationship with the manufacturers whose products we recommend. Ask us what we earn on anything we suggest and we will tell you.",
   },
   {
-    question: "What is Nuvama's role, and what is yours?",
+    question: "Who manages the products, and what do you do?",
     answer:
-      "Nuvama Wealth Management Ltd manufactures and issues the investment products — they run the strategies and make the investment decisions. Sarvam Associates is their authorised distribution partner: we assess whether a product suits you, handle onboarding and paperwork, and manage your relationship and reviews. We do not manage any portfolio and we do not issue any product.",
+      "The product providers — asset management companies, portfolio managers and other issuers — manufacture and issue the investment products; they run the strategies and make the investment decisions. Sarvam Associates distributes them as an authorised distribution partner: we assess whether a product suits you, handle onboarding and paperwork, and manage your relationship and reviews. We do not manage any portfolio and we do not issue any product.",
   },
   {
     question: "Do I need a large amount to start?",

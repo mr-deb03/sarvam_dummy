@@ -36,7 +36,7 @@ export const NAV_GROUPS: NavGroup[] = [
       href: serviceHref(s.slug),
       description: s.description,
     })),
-    footer: { label: "All CA services", href: "/services" },
+    footer: { label: "All services", href: "/services" },
   },
 ];
 
@@ -66,7 +66,7 @@ export const FOOTER_COLUMNS: { title: string; links: NavLink[] }[] = [
     })),
   },
   {
-    title: "CA Services",
+    title: "Services",
     links: [
       ...SERVICES.map((s) => ({ label: s.name, href: serviceHref(s.slug) })),
       { label: "All services", href: "/services" },

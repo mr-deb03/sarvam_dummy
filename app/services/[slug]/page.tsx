@@ -50,17 +50,16 @@ export default async function ServicePage({
       <BreadcrumbJsonLd
         items={[
           { name: "Home", path: "/" },
-          { name: "CA Services", path: "/services" },
+          { name: "Services", path: "/services" },
           { name: service.name, path: serviceHref(service.slug) },
         ]}
       />
 
       <PageHero
-        eyebrow={service.eyebrow}
         title={service.name}
         lede={service.lede}
         crumbs={[
-          { label: "CA Services", href: "/services" },
+          { label: "Services", href: "/services" },
           { label: service.shortName },
         ]}
       >
@@ -69,7 +68,7 @@ export default async function ServicePage({
             Talk to us about this
           </ButtonLink>
           <ButtonLink href="/services" variant="tertiary" size="lg" withArrow>
-            All CA services
+            All services
           </ButtonLink>
         </div>
       </PageHero>

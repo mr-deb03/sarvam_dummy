@@ -44,9 +44,17 @@ export default async function CategoryPage({
   const products = getProductsByCategory(category.slug);
 
   // Union of every disclaimer any product in this category carries, so the
-  // category page never states less than its own products do.
+  // category page never states less than its own products do. The partner is
+  // named only on its own product pages, so its facilitation notice becomes
+  // the generic platform one here — same disclosure, no name.
   const disclaimerIds = [
-    ...new Set(products.flatMap((p) => p.disclaimerIds)),
+    ...new Set(
+      products
+        .flatMap((p) => p.disclaimerIds)
+        .map((id) =>
+          id === "nuvama-facilitation" ? "platform-facilitation" : id,
+        ),
+    ),
   ] as DisclaimerId[];
 
   return (

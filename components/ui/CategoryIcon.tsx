@@ -1,5 +1,7 @@
 import {
+  Calculator,
   ClipboardCheck,
+  ClipboardList,
   FileCheck,
   FileSpreadsheet,
   Gem,
@@ -40,6 +42,8 @@ const ICON_MAP: Record<string, LucideIcon> = {
   PenLine,
   FileCheck,
   RefreshCw,
+  ClipboardList,
+  Calculator,
 };
 
 export function CategoryIcon({

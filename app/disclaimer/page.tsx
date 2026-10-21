@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal/LegalPage";
 import { Disclaimer } from "@/components/ui/Disclaimer";
 import { DISCLAIMERS } from "@/lib/content/disclaimers";
-import { COMPANY, PARTNER, REGISTRATIONS } from "@/lib/content/company";
+import { COMPANY, REGISTRATIONS } from "@/lib/content/company";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
@@ -35,7 +35,7 @@ export default function DisclaimerPage() {
           paragraphs: [
             REGISTRATIONS.roleStatement,
             DISCLAIMERS["distributor-role"].body,
-            `${PARTNER.legalName} and other product providers manufacture and issue the products described on this site. ${COMPANY.name} distributes them. We do not manage any portfolio, we do not issue any product, and we do not take custody of client funds. Investments are made in your own name, into accounts and folios that belong to you.`,
+            `Product providers — asset management companies, portfolio managers, issuers and insurers — manufacture and issue the products described on this site. ${COMPANY.name} distributes them. We do not manage any portfolio, we do not issue any product, and we do not take custody of client funds. Investments are made in your own name, into accounts and folios that belong to you.`,
           ],
         },
         {
@@ -86,7 +86,7 @@ export default function DisclaimerPage() {
       ]}
       footer={
         <Disclaimer
-          ids={["platform-facilitation", "nuvama-facilitation"]}
+          ids={["platform-facilitation"]}
           variant="panel"
         />
       }

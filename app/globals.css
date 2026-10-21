@@ -113,11 +113,13 @@
   --text-display-sm--letter-spacing: -0.008em;
   --text-display-sm--font-weight: 600;
 
-  /* Interface scale. */
-  --text-card: 1.375rem;
-  --text-card--line-height: 1.25;
-  --text-card--letter-spacing: -0.006em;
-  --text-card--font-weight: 600;
+  /* Interface scale. Card titles are `text-card-title`, not `text-card`:
+     `--color-card` already exists, and Tailwind resolves `text-card` to that
+     colour (white) rather than to a size. */
+  --text-card-title: 1.375rem;
+  --text-card-title--line-height: 1.25;
+  --text-card-title--letter-spacing: -0.006em;
+  --text-card-title--font-weight: 600;
 
   --text-body-lg: clamp(1.0625rem, 1.2vw, 1.25rem);
   --text-body-lg--line-height: 1.65;
@@ -237,7 +239,6 @@
   }
 }
 
-/* Long-form editorial measure — 45–75 characters. */
 /* Vertical rhythm. Generous by default — premium design needs breathing room. */
 @utility section-sm {
   padding-block: 3rem;
@@ -253,7 +254,7 @@
   }
 }
 
-/* Paragraph measure helpers. */
+/* Paragraph measure helpers — long-form editorial measure, 45–75 characters. */
 @utility measure {
   max-width: 40rem;
 }
@@ -313,30 +314,6 @@
 }
 
 /* ==========================================================================
-   Keyframes — run during first paint, no JS gate, cannot delay LCP.
-   ========================================================================== */
-
-@keyframes grow {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
-
-@keyframes fadeSlideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* ==========================================================================
    Scroll reveals — CSS-first, progressively enhanced.
 
    Content is VISIBLE BY DEFAULT. The hidden state applies only once the inline
@@ -392,10 +369,6 @@
   }
   html.js [data-reveal][data-revealed] [data-reveal-item]:nth-child(n + 7) {
     transition-delay: 0.5s;
-  }
-
-  .hero-label {
-    animation: fadeSlideIn 0.7s var(--ease-editorial) both;
   }
 }
 

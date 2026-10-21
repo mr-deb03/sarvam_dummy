@@ -8,7 +8,7 @@ import { Montserrat, Open_Sans } from "next/font/google";
  *
  * Loaded as a variable font (no `weight` array), which covers the whole
  * 100–900 axis in a single file instead of one per weight. Italic is a second
- * file and is genuinely used: the hero's Hinglish line and both pull quotes
+ * file and is genuinely used: the hero's first line and both pull quotes
  * set it against the roman.
  */
 export const montserrat = Montserrat({

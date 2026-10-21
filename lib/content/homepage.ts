@@ -15,17 +15,16 @@ export const HERO = {
   // directly above this in the header, so repeating it wastes the line.
   eyebrow: "Tax · Wealth · Protection · Mumbai",
 
-  // SOURCE CORRECTION — headline.
-  // Original (mockup, left untouched by the revision document):
-  //   "Ab FD se zyada kamao — without the risk"
-  // "without the risk" is an absolute risk-free claim. It is contradicted by
-  // every disclaimer on the same page and is exactly the wording brief §42
-  // prohibits. The revision document annotated the sub-copy beneath this line
-  // but never this line, so it reads as unreviewed rather than deliberate.
-  // "without the guesswork" keeps the Hinglish cadence and the em-dash break
-  // while dropping the unsupportable claim. Reverting is a one-line change.
-  headlineLead: "Ab FD se zyada kamao",
-  headlineTail: "without the guesswork",
+  // Headline, replaced at the client's request (Oct 2026). The lead line is
+  // set in italic, the tail in roman.
+  //
+  // History: the mockup's "Ab FD se zyada kamao — without the risk" shipped
+  // as "…without the guesswork", because "without the risk" is an absolute
+  // risk-free claim that brief §42 prohibits. Whatever replaces this line must
+  // not reintroduce a return or safety promise — `npm run check:claims`
+  // guards the worst of that wording.
+  headlineLead: "Every rupee,",
+  headlineTail: "planned with purpose.",
 
   // Verbatim from the revision document.
   subhead:
@@ -41,10 +40,9 @@ export const HERO = {
 /* --------------------------------------------------------------------------
    Trust strip.
 
-   The mockup's fourth chip, "Nuvama Authorised Distribution Partner", was
-   marked for deletion by the revision document. It is retained here because
-   the user's decision was to keep the Nuvama relationship and present it
-   accurately — but it names Sarvam's role as distributor, never as manufacturer.
+   The mockup's fourth chip, "Nuvama Authorised Distribution Partner", is not
+   shown — removed at the client's request (Oct 2026). Nuvama is now named
+   only on the product pages of the products it issues.
 
    The mockup's "SEBI Registered Investment Advisor" chip is NOT retained.
    Sarvam operates as an AMFI-registered distributor; see REGISTRATIONS in
@@ -67,41 +65,42 @@ export const TRUST_CHIPS: { icon: string; strong: string; rest: string }[] = [
     strong: "Bhandup (West)",
     rest: "— a practice you can walk into",
   },
+];
+
+/* --------------------------------------------------------------------------
+   Planning tools — the two self-serve pages, as cards on the homepage.
+
+   Each line is taken from that page's own meta description, so a card never
+   promises more than the page it opens.
+   -------------------------------------------------------------------------- */
+
+export const PLANNING_TOOLS: {
+  href: string;
+  icon: string;
+  title: string;
+  line: string;
+  cta: string;
+}[] = [
   {
-    icon: "ShieldCheck",
-    strong: "Authorised distribution partner",
-    rest: "of Nuvama Wealth Management Ltd",
+    href: "/financial-plan",
+    icon: "ClipboardList",
+    title: "Build your financial plan",
+    line: "Map your income, goals and holdings into a free illustrative plan in about ten minutes.",
+    cta: "Start your plan",
+  },
+  {
+    href: "/calculators",
+    icon: "Calculator",
+    title: "SIP & lump-sum calculator",
+    line: "An illustration of how monthly or one-time investments compound at an assumed rate.",
+    cta: "Open the calculator",
   },
 ];
 
 /* --------------------------------------------------------------------------
-   Problem / positioning (brief §12)
+   Why Sarvam — three pillars, verbatim from the revision document. Shown on
+   /about.
    -------------------------------------------------------------------------- */
-
-export const PROBLEM = {
-  eyebrow: "The bigger picture",
-  heading: "Financial decisions rarely exist in isolation.",
-  body: "Tax affects what you keep. What you keep decides what you can invest. Investments decide your liquidity. Liquidity decides whether protection ever gets bought. And for a business owner, every one of those reaches back into the company. Most people get each piece from a different person, and nobody sees the whole.",
-  chain: [
-    { label: "Tax", note: "What you actually keep" },
-    { label: "Investments", note: "What that capital becomes" },
-    { label: "Liquidity", note: "What you can reach when you need it" },
-    { label: "Protection", note: "What survives a bad year" },
-    { label: "Wealth", note: "What compounds over a decade" },
-  ],
-  close: "Sarvam Associates connects these pieces.",
-} as const;
-
-/* --------------------------------------------------------------------------
-   Why Sarvam — three pillars, verbatim from the revision document
-   -------------------------------------------------------------------------- */
-
-export const WHY_INTRO = {
-  eyebrow: "Why Sarvam",
-  heading: "Your neighbourhood CA, now your wealth partner",
-  // Verbatim from the revision document.
-  body: "Sarvam Associates has been your trusted financial partner for taxes and compliance. Now, we bring you premium investment products built for serious wealth creation — with the personal guidance you already trust us for.",
-} as const;
 
 export const PILLARS: Pillar[] = [
   {
@@ -134,13 +133,6 @@ export const PILLARS: Pillar[] = [
       "No product pushed to hit a target. We tell you how we're paid, and we recommend what actually fits your goals — including when that means recommending nothing at all.",
   },
 ];
-
-/** The pull-quote in the "why" panel. Alternative hook from the revision doc. */
-export const WHY_QUOTE = {
-  quote:
-    "Safe money isn't the same as smart money. The right wealth strategy changes everything.",
-  attribution: "Sarvam Associates",
-} as const;
 
 /* --------------------------------------------------------------------------
    Process — four steps, verbatim from the revision document
@@ -177,56 +169,13 @@ export const PROCESS: ProcessStep[] = [
   },
 ];
 
-/* --------------------------------------------------------------------------
-   The Numbers (brief §19)
+/*
+   Sarvam's own metrics, shown on /about.
 
-   Cards 1 and 2 are NUVAMA PLATFORM figures, not Sarvam's own. They carry an
-   explicit attribution line on the card — presenting a partner's AUM as your
-   own is the single most common misrepresentation in this category.
-
-   Card 3 is an indicative range and never count-up animates: animating a
-   return figure implies it is being achieved.
-
-   The mockup's "₹1Cr+ Assets Guided" hero card is deliberately absent. It is
-   internally inconsistent (₹1 Cr across "500+ investors" is ~₹20k each) and
-   sits beside a ₹1L Cr+ figure on the same page. Unverifiable and
-   self-undermining, so it is dropped rather than displayed.
-   -------------------------------------------------------------------------- */
-
-export const NUMBERS: Stat[] = [
-  {
-    id: "aum-access",
-    value: 1,
-    prefix: "₹",
-    suffix: "L Cr+",
-    label: "AUM you get access to",
-    attribution: "Nuvama Wealth platform",
-  },
-  {
-    id: "investors",
-    value: 1,
-    suffix: "M+",
-    label: "Investors across our platform network",
-    attribution: "Nuvama Wealth platform",
-  },
-  {
-    id: "mld-range",
-    value: null,
-    displayOverride: "8.5–12%",
-    label: "Indicative returns on MLD offerings",
-    indicative: true,
-    noAnimate: true,
-  },
-  {
-    id: "capital-protection",
-    value: 100,
-    suffix: "%",
-    label: "Base capital protection on select offerings",
-    attribution: "Select structures only, subject to issuer credit",
-  },
-];
-
-/** Sarvam's own metrics — distinct from the platform figures above. */
+   The mockup's "₹1Cr+ Assets Guided" figure is deliberately absent. It is
+   internally inconsistent (₹1 Cr across "500+ investors" is ~₹20k each), so it
+   is dropped rather than displayed.
+*/
 export const SARVAM_METRICS: Stat[] = [
   {
     id: "years",
@@ -249,48 +198,3 @@ export const SARVAM_METRICS: Stat[] = [
    -------------------------------------------------------------------------- */
 
 export { SERVICES } from "./services";
-
-/* --------------------------------------------------------------------------
-   FD vs Debt vs Bonds comparison (brief §22)
-
-   Figures from _source/investment-products.html, which is the only internally
-   consistent source for them. The mockup's other comparison widget
-   ("FD 7–9% vs Equity 12–18% potential") is NOT reproduced: its FD figure
-   contradicts the table below, and the equity figure has no source at all.
-   -------------------------------------------------------------------------- */
-
-export const COMPARISON = {
-  eyebrow: "Where your money can sit",
-  heading: "Same rupee. Different job.",
-  intro:
-    "There is no best option here — only a best fit for a given horizon and a given tolerance for risk. The figures below are indicative, not offers.",
-  columns: [
-    {
-      name: "Bank FD",
-      yield: "6.5–7.5%",
-      risk: "Low",
-      liquidity: "Locked, penalty on premature exit",
-      tax: "Taxed as income at slab rate",
-      purpose: "Certainty over return",
-      highlight: false,
-    },
-    {
-      name: "Debt Funds",
-      yield: "7–9%",
-      risk: "Moderately low — credit and rate risk",
-      liquidity: "Redeem in 1–2 business days",
-      tax: "Per prevailing rules for the fund type",
-      purpose: "Stability with access",
-      highlight: true,
-    },
-    {
-      name: "Bonds",
-      yield: "8–11%",
-      risk: "Moderate — credit risk on the issuer",
-      liquidity: "Low — thin secondary market",
-      tax: "Coupon taxed as income",
-      purpose: "Contracted income on known dates",
-      highlight: false,
-    },
-  ],
-} as const;

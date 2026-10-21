@@ -46,7 +46,6 @@ export interface Service {
   /** One line, used on cards and in the nav dropdown. */
   description: string;
   icon: string;
-  eyebrow: string;
   lede: string;
   intro: string[];
   blocks: ServiceBlock[];
@@ -64,7 +63,6 @@ export const SERVICES: Service[] = [
     description:
       "Income tax planning, return filing, assessments and representation for individuals and businesses.",
     icon: "Receipt",
-    eyebrow: "CA Services",
     lede: "Direct tax planning is a year-on-year process, not a March scramble — using the exemptions and deductions actually available to you, and keeping the deduction and filing machinery running on time.",
     intro: [
       "Direct tax consulting enables individuals and businesses to use available exemptions and deductions to reduce tax liability, and to plan legal investments in tax-saving instruments. It works best as a continuous process rather than a year-end exercise.",
@@ -172,7 +170,6 @@ export const SERVICES: Service[] = [
     description:
       "Registration, monthly and annual returns, reconciliation and advisory on indirect tax.",
     icon: "FileSpreadsheet",
-    eyebrow: "CA Services",
     lede: "One tax at the end of the supply chain instead of a stack of them along the way — provided the registration, invoicing and returns behind it are all in order.",
     intro: [
       "Goods and Services Tax, put simply, means that instead of paying tax at every level in the form of VAT, excise duty, sales tax, customs, luxury tax and service tax, a single tax is paid at the end of the supply chain.",
@@ -263,7 +260,6 @@ export const SERVICES: Service[] = [
     description:
       "Statutory, internal, management, due diligence and tax audit for businesses and professional practices.",
     icon: "ClipboardCheck",
-    eyebrow: "CA Services",
     lede: "An independent appraisal function established within an organisation to examine and evaluate its activities — as a service to the organisation, not an exam it has to pass.",
     intro: [
       "We have wide experience conducting audits for large and medium-sized business entities, and prepare financial statements both to accounting standards and in compliance with generally accepted accounting principles.",
@@ -360,7 +356,6 @@ export const SERVICES: Service[] = [
     description:
       "Life, health and business protection, advised alongside the wealth plan rather than separately.",
     icon: "Umbrella",
-    eyebrow: "CA Services",
     lede: "Insurance is the lifeline of a family — and a financial tool for reaching goals, not a product bought once and forgotten.",
     intro: [
       "Sarvam Associates provides an insurance advisory service that works through a systematic analysis of your future needs, so cover is sized against what you are actually protecting rather than what happens to be on sale.",

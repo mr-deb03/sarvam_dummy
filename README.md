@@ -22,6 +22,8 @@ supplied. Each is a single constant.
 | What | Where | Current state |
 |---|---|---|
 | **AMFI ARN number** | `REGISTRATIONS.arn` in `lib/content/company.ts` | `"ARN-XXXXXX"`. AMFI requires the ARN on distributor marketing material. `hasArn` is false while it contains `XXXXXX`, and every surface that would print it renders nothing rather than showing a placeholder to the public. |
+| **APMI registration (APRN)** | `REGISTRATIONS.aprn` in `lib/content/company.ts` | `"APRN-XXXXXX"`. SEBI has required PMS distributors to be registered with APMI since 1 Jan 2025, and the site lists PMS products. Hidden on `/policies` until set. |
+| **IRDAI registration** | `REGISTRATIONS.irdai` in `lib/content/company.ts` | Category and number are `"XXXXXX"`. The site solicits insurance, so the registration it does so under belongs on `/policies`. Hidden until both are set. |
 | **Phone number** | `COMPANY.phone` in `lib/content/company.ts` | `null`. **No phone number appears in any source document.** Contact surfaces render email-only and the LocalBusiness JSON-LD omits `telephone` rather than inventing one. |
 | **Real testimonials** | `lib/content/testimonials.ts` | All six entries are `placeholder: true` — the source document heads them "Dummy Reviews". The home page leaves the section out entirely until at least one entry is real. See that file's header for the swap procedure. |
 | **Lead delivery** | `SMTP_USER` + `SMTP_PASSWORD` (email, to `LEAD_EMAIL_TO`) and/or `LEAD_WEBHOOK_URL`, consumed by `lib/forms/deliver.ts` | Must be set on the host. With neither, submissions validate and return success but are delivered nowhere. |
@@ -34,8 +36,8 @@ supplied. Each is a single constant.
 
 ## Brand assets
 
-Both supplied PNGs live untouched in `public/image/`. Everything else there is
-derived by `npm run build:assets`
+Both supplied PNGs live untouched in `public/image/`. Everything else there,
+apart from the hero photo, is derived by `npm run build:assets`
 ([scripts/build-brand-assets.mjs](scripts/build-brand-assets.mjs)), so it is
 reproducible — re-run it if either original is replaced.
 
@@ -46,6 +48,7 @@ reproducible — re-run it if either original is replaced.
 | `icon-512.png` | derived | favicon |
 | `apple-icon.png` | derived | iOS home screen |
 | `sarvam-main-onnavy.png` | derived | footer logo |
+| `hero-growth.jpg` | [micheile henderson on Unsplash](https://unsplash.com/photos/lZ_4nPFKcV8), Unsplash License; 2000px | homepage hero photo — replace with the practice's own photo when there is one (not touched by `build:assets`) |
 
 Three things the derivation handles:
 
@@ -678,11 +681,14 @@ Source files are preserved in `_source/` and excluded from the build.
 
 ### Decisions taken
 
-1. **Nuvama is retained**, overriding the revision document, which removed every
-   Nuvama reference in five places. Sarvam is presented strictly as
-   *distributor*; Nuvama Wealth Management Ltd as *manufacturer*. The homepage
-   "Who does what" panel states this explicitly. The document's other copy
-   rewrites still apply — they are independent of the partner question.
+1. **Nuvama is named only on its own product pages** (client decision, Oct
+   2026) — through the `nuvama-facilitation` disclaimer and the product's
+   structured data. Everywhere else the site speaks of "product providers":
+   the footer, `/about`, `/disclaimer`, `/policies`, the FAQ and the homepage.
+   Category pages swap that disclaimer for the generic `platform-facilitation`
+   one. Sarvam is still presented strictly as *distributor* and the providers
+   as *manufacturers*; the "Who does what" panel on `/about` states this
+   explicitly.
 2. **AMFI-registered distributor.** All "SEBI Registered Investment Advisor"
    wording is removed sitewide; an entity cannot generally be both a
    fee-charging RIA and a commission-earning distributor, and no RIA number
@@ -715,12 +721,12 @@ revert.
 
 | Source claim | Problem | Ships as |
 |---|---|---|
-| "Ab FD se zyada kamao — **without the risk**" | Absolute risk-free claim, contradicted by every disclaimer on the same page. The revision doc annotated the copy beneath it and left this untouched — unreviewed, not deliberate. | "…**without the guesswork**" |
+| "Ab FD se zyada kamao — **without the risk**" | Absolute risk-free claim, contradicted by every disclaimer on the same page. The revision doc annotated the copy beneath it and left this untouched — unreviewed, not deliberate. | "…**without the guesswork**" — since replaced entirely (Oct 2026) by "*Every rupee,* planned with purpose." |
 | "**No commissions** driving our advice" | Incompatible with the distributor model, whose revenue *is* trail commission. | "No product pushed to hit a target. We tell you how we're paid…" |
 | "…debentures — with **your base investment protected**" | States universally what is true only of select principal-protected MLDs, and remains issuer-credit dependent. | "…**base capital protection available on select offerings**" |
 | "**Instant** disbursement" | Sanction is at the lender's discretion. | "**Quick** disbursement… subject to approval" |
 | "**₹1Cr+** assets guided" | ~₹20k per investor across "500+ investors", beside a ₹1L Cr+ figure on the same page. | **Dropped** |
-| "FD 7–9% vs equity 12–18%" | FD figure contradicts the catalogue (6.5–7.5%); equity figure unsourced. | **Dropped** — one comparison table, from the catalogue |
+| "FD 7–9% vs equity 12–18%" | FD figure contradicts the catalogue (6.5–7.5%); equity figure unsourced. | **Dropped** |
 
 ---
 

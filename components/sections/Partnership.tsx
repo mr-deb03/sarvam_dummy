@@ -2,16 +2,16 @@ import { Reveal } from "@/components/motion/Reveal";
 import { ButtonLink } from "@/components/ui/Button";
 import { Disclaimer } from "@/components/ui/Disclaimer";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { PARTNER } from "@/lib/content/company";
 
 /**
- * Institutional access — the site's first full dark section.
+ * Institutional access — a full dark section, on /about.
  *
  * The compliance-critical job here is keeping two roles legible and distinct:
- * Nuvama MANUFACTURES and issues the products; Sarvam DISTRIBUTES them. The
- * two-panel split below says so in as many words, because blurring them is the
- * most common misrepresentation in this category and the easiest to make by
- * accident.
+ * product providers MANUFACTURE and issue the products; Sarvam DISTRIBUTES
+ * them. The two-panel split below says so in as many words, because blurring
+ * them is the most common misrepresentation in this category and the easiest
+ * to make by accident. Providers are not named here — the partner is named
+ * only on its own product pages.
  *
  * Bullet copy is from the August 2026 revision document.
  */
@@ -38,7 +38,7 @@ export function Partnership() {
             <Reveal>
               <SectionHeader
                 onDark
-                eyebrow="Our institutional partner"
+                eyebrow="Institutional access"
                 title={
                   <>
                     Institutional strength.
@@ -81,14 +81,15 @@ export function Partnership() {
             <dl className="space-y-4">
               <div className="border-paper/12 bg-paper/[0.04] rounded-card border p-8">
                 <dt className="font-display text-paper text-display-sm">
-                  {PARTNER.legalName}
+                  The product providers
                 </dt>
                 <dd className="text-paper/60 mt-4 text-sm">
                   <span className="text-paper/90 font-medium">
-                    Manufactures and issues the products.
+                    Manufacture and issue the products.
                   </span>{" "}
-                  Runs the investment strategies and makes every buy and sell
-                  decision inside them. {PARTNER.description}
+                  Asset management companies, portfolio managers, issuers and
+                  insurers. They run the investment strategies and make every
+                  buy and sell decision inside them.
                 </dd>
               </div>
 
@@ -107,7 +108,7 @@ export function Partnership() {
               </div>
             </dl>
 
-            <Disclaimer ids={["nuvama-facilitation"]} onDark className="mt-8" />
+            <Disclaimer ids={["platform-facilitation"]} onDark className="mt-8" />
           </Reveal>
         </div>
       </div>

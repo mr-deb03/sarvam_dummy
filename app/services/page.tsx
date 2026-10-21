@@ -11,7 +11,7 @@ import { SERVICES, serviceHref } from "@/lib/content/services";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "CA Services — Tax, GST, Audit & Insurance",
+  title: "Services — Tax, GST, Audit & Insurance",
   description:
     "Direct tax, GST and indirect taxation, audit and assurance, and insurance advisory from a Mumbai chartered accountancy practice of 15+ years.",
   path: "/services",
@@ -23,15 +23,14 @@ export default function ServicesPage() {
       <BreadcrumbJsonLd
         items={[
           { name: "Home", path: "/" },
-          { name: "CA Services", path: "/services" },
+          { name: "Services", path: "/services" },
         ]}
       />
 
       <PageHero
-        eyebrow="CA Services"
         title="The practice the wealth arm grew out of."
         lede="Sarvam Associates has handled tax and compliance for 15+ years. These four services are the foundation — and the reason we can look at an investment and already know what it does to your tax position."
-        crumbs={[{ label: "CA Services" }]}
+        crumbs={[{ label: "Services" }]}
       />
 
       <section className="bg-mist section">

@@ -13,7 +13,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Frequently Asked Questions",
   description:
-    "How Sarvam Associates is paid, what we can and cannot promise, what Nuvama's role is, and what happens on the first call.",
+    "How Sarvam Associates is paid, what we can and cannot promise, who manages the products, and what happens on the first call.",
   path: "/faq",
 });
 

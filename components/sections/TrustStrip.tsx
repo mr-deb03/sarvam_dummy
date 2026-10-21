@@ -9,16 +9,16 @@ import { TRUST_CHIPS } from "@/lib/content/homepage";
  * both be claimed) and "₹1Cr+ assets guided" (internally inconsistent with the
  * other figures on the same page).
  *
- * Set as a quiet rule of four rather than a row of badges — no icon plates, no
- * colour. It is a statement of record, not a feature list.
+ * Set as a quiet rule of three rather than a row of badges — no icon plates,
+ * no colour. It is a statement of record, not a feature list.
  */
 export function TrustStrip() {
   return (
     <section aria-label="Credentials" className="border-line border-y">
       <div className="container-page">
-        <ul className="divide-line grid divide-y sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4 lg:divide-x">
+        <ul className="divide-line grid divide-y sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           {TRUST_CHIPS.map((chip) => (
-            <li key={chip.strong} className="py-8 lg:px-8 lg:first:pl-0 lg:last:pr-0">
+            <li key={chip.strong} className="py-8 sm:px-8 sm:first:pl-0 sm:last:pr-0">
               <p className="text-navy text-sm font-semibold tracking-[0.01em]">
                 {chip.strong}
               </p>

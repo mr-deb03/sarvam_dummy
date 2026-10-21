@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, Mail, MapPin } from "lucide-react";
-import { COMPANY, PARTNER, REGISTRATIONS } from "@/lib/content/company";
+import { COMPANY, REGISTRATIONS } from "@/lib/content/company";
 import { FOOTER_DISCLAIMER_IDS, getDisclaimers } from "@/lib/content/disclaimers";
 import { FOOTER_COLUMNS } from "@/lib/content/nav";
 import { SOCIAL_ICONS } from "@/components/ui/SocialIcon";
@@ -18,7 +18,7 @@ export function Footer() {
           <div>
             <Logo onDark variant="footer" />
 
-            <p className="text-paper/55 measure mt-8 max-w-xs text-sm">
+            <p className="text-paper/55 measure mt-8 text-sm">
               A Mumbai practice that has handled tax and compliance for 15+
               years — now bringing the same relationship to how you invest.
             </p>
@@ -132,20 +132,25 @@ export function Footer() {
           <p className="text-paper/55 mt-5 text-xs">
             {REGISTRATIONS.roleStatement}
             {REGISTRATIONS.hasArn && ` ${REGISTRATIONS.arn}.`} Products are
-            manufactured and issued by {PARTNER.legalName} and other product
-            providers; Sarvam Associates distributes them and does not
-            manufacture, issue or manage any product shown on this site.
+            manufactured and issued by their respective product providers;
+            Sarvam Associates distributes them and does not manufacture, issue
+            or manage any product shown on this site.
           </p>
         </div>
       </div>
 
       <div className="border-paper/10 relative border-t">
         <div className="container-page flex flex-col gap-4 py-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-paper/40 text-xs">
-            © {year} {COMPANY.name}. All rights reserved.
+          {/* AMFI requires the tagline beside the distributor's name on the
+              website, in a clear and legible font — so it sits with the name
+              here rather than inside a disclaimer paragraph. */}
+          <p className="text-paper/70 text-xs">
+            © {year} {COMPANY.name} · {REGISTRATIONS.mfdTagline}
+            {REGISTRATIONS.hasArn ? ` · ${REGISTRATIONS.arn}` : ""}
           </p>
           <ul className="flex flex-wrap gap-x-7 gap-y-2">
             {[
+              { label: "Policies", href: "/policies" },
               { label: "Disclaimer", href: "/disclaimer" },
               { label: "Privacy Policy", href: "/privacy-policy" },
               { label: "Terms of Use", href: "/terms" },

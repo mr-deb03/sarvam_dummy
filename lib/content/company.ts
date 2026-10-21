@@ -99,21 +99,55 @@ export const REGISTRATIONS = {
     return !this.arn.includes("XXXXXX");
   },
 
+  /**
+   * The tagline AMFI requires beside an MFD's name in every form of
+   * communication, websites included (AMFI Master Circular for MFDs,
+   * 14 Jan 2026, para 1.3.6 and Code of Conduct 5(g)). Exact wording.
+   */
+  mfdTagline: "AMFI-registered Mutual Fund Distributor",
+
+  /**
+   * REQUIRED BEFORE LAUNCH — placeholder. APMI registration number (APRN).
+   * Since 1 Jan 2025 SEBI requires anyone distributing PMS to be registered
+   * with APMI (SEBI circular SEBI/HO/IMD/IMD-PoD-1/CIR/2024/32). The site
+   * lists PMS products, so this must be held. Hidden until supplied.
+   */
+  aprn: "APRN-XXXXXX",
+
+  get hasAprn(): boolean {
+    return !this.aprn.includes("XXXXXX");
+  },
+
+  /**
+   * REQUIRED BEFORE LAUNCH — placeholder. The IRDAI registration under which
+   * insurance is solicited, and its category (e.g. corporate agent, broker,
+   * POSP). Hidden until supplied.
+   */
+  irdai: { category: "XXXXXX", registration: "XXXXXX" },
+
+  get hasIrdai(): boolean {
+    return (
+      !this.irdai.category.includes("XXXXXX") &&
+      !this.irdai.registration.includes("XXXXXX")
+    );
+  },
+
   /** How Sarvam describes its own role. Used in the footer and product pages. */
   roleStatement:
-    "Sarvam Associates is an AMFI-registered mutual fund distributor and an authorised distribution partner of Nuvama Wealth Management Ltd.",
+    "Sarvam Associates is an AMFI-registered mutual fund distributor and an authorised distribution partner for the investment products shown on this site.",
 } as const;
 
 /* ==========================================================================
    Institutional partner
 
-   Retained per the user's decision, overriding the August 2026 revision
-   document (which removed every Nuvama reference in five places).
+   Named ONLY on the product pages of the products it issues — through the
+   `nuvama-facilitation` disclaimer and the product's structured data. The
+   client asked (Oct 2026) for the name to be removed everywhere else; site-
+   wide copy speaks of "product providers" instead.
 
    The distinction below is the compliance-critical part: Nuvama MANUFACTURES
-   and issues the products; Sarvam DISTRIBUTES them. The site must never blur
-   the two, and figures belonging to Nuvama's platform are labelled as such
-   wherever they appear.
+   and issues the products; Sarvam DISTRIBUTES them. Wherever the name does
+   appear, the two must never be blurred.
    ========================================================================== */
 
 export const PARTNER = {
@@ -121,8 +155,6 @@ export const PARTNER = {
   legalName: "Nuvama Wealth Management Ltd",
   role: "Product manufacturer and platform",
   sarvamRole: "Authorised distribution partner",
-  description:
-    "One of India's leading wealth management platforms, trusted by HNIs and institutions.",
 } as const;
 
 export type Company = typeof COMPANY;
